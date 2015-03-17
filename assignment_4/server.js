@@ -31,7 +31,7 @@ function postAction(res, action) {
 
 function gameLogic(requestEle, resultJSON, gameArray) {
     var selectEle = gameArray[Math.floor(Math.random() * gameArray.length)];
-    console.log(selectEle);
+    console.log("Selected From Server :" +selectEle);
     if (requestEle === "rock") {
         if (selectEle === "scissors" || selectEle === "lizard") {
             resultJSON.outcome = "win";
@@ -99,10 +99,6 @@ function gameLogic(requestEle, resultJSON, gameArray) {
 }
 
 function frontPage(req, res) {
-
-
-
-
     if (req.method === "POST" && (req.url === "/play/rock" || req.url === "/play/paper" ||
             req.url === "/play/scissors" || req.url === "/play/lizard" || req.url === "/play/spock")) {
 
@@ -127,17 +123,14 @@ function frontPage(req, res) {
             "Content-Type": "text/html"
         });
         beginPage(res);
-
+        res.write("Please select one<br/><br/>");
         postAction(res, "rock");
         postAction(res, "paper");
         postAction(res, "scissors");
         postAction(res, "lizard");
         postAction(res, "spock");
-
         endPage(res);
     }
-
-
 }
 server = http.createServer(frontPage);
 server.listen(3000);
