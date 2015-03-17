@@ -24,7 +24,6 @@ function endPage(res) {
 
 function postAction(res, action) {
     res.write("<form method='POST' action='/play/" + action + "'>\n");
-    res.write("<input type='hidden' name='element' value='" + action + "'>\n");
     res.write("<input type='submit' value='" + action + "'>\n");
     res.write("</form><br/>");
 }
@@ -113,6 +112,7 @@ function frontPage(req, res) {
 
         var parts = req.url.split("/");
             var requestEle = parts[2];
+            
         resultJSON = gameLogic(requestEle, resultJSON, gameArray);
         console.log(resultJSON);
         res.setHeader('Content-Type', 'application/json');
